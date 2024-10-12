@@ -1,0 +1,163 @@
+{% liquid
+  assign id = section.id
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_top = section.settings.padding_top
+  assign wrapper = 'announcement-bar-outer-wrapper-' | append: id
+%}
+
+<style>
+  .{{wrapper}} {
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+  }
+</style>
+
+{% capture splide_options %}
+  {
+      "type"   : "{{ section.settings.slide_type }}",
+      "perPage": {{ section.settings.slide_per_page }},
+      "pagination": {{section.settings.pagination}},
+      "arrows": {{section.settings.arrows}},
+      "autoplay": {{section.settings.autoplay}},
+      "interval": {{section.settings.autoplay_interval | times:1000}}
+  }
+{% endcapture %}
+
+<div class='{{wrapper}} max-w-screen bg-black'>
+  <div class='announcement-bar'>
+    <splider-component
+      data-options='{{ splide_options }}'
+      class='splide stack-container'
+    >
+      <div class='splide__arrows stack-item'>
+        <button class='splide__arrow splide__arrow--prev svg-wrapper'>
+          {{ 'arrow-right.svg' | inline_asset_content }}
+        </button>
+
+        <button class='splide__arrow splide__arrow--next svg-wrapper'>
+          {{ 'arrow-right.svg' | inline_asset_content }}
+        </button>
+      </div>
+      <div class='splide__track stack-item'>
+        <ul class='splide__list'>
+          {% for block in section.blocks %}
+            <li class='splide__slide'>
+              {{ block.settings.text | replace: '<p', '<p class="text-center text-white"' }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </splider-component>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "class": "announcement-bar",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slider settings"
+    },
+    {
+      "type": "select",
+      "id": "slide_type",
+      "label": "Slider type",
+      "options": [
+        {
+          "value": "loop",
+          "label": "Loop"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        },
+        {
+          "value": "slide",
+          "label": "Slide"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "slide_per_page",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Slide per page",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "pagination",
+      "label": "Show pagination",
+      "default": false,
+      "info": "Enables dots at bottom of slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows",
+      "label": "Enable arrows",
+      "default": true,
+      "info": "Enables arrows button for navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable Auto play",
+      "default": false,
+      "info": "Auto play the slides"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "label": "Auto play duration",
+      "min": 1,
+      "max": 10,
+      "default": 3,
+      "step": 0.5,
+      "unit": "sec"
+    },
+    {
+      "type": "header",
+      "content": "Padding settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Announcement Bar" }]
+}
+{% endschema %}

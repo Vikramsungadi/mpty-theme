@@ -1,0 +1,25 @@
+{
+  "name": "mpty-theme",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "shopify theme dev -s mpty-theme.myshopify.com",
+    "dev-sync": "shopify theme dev --theme-editor-sync -s mpty-theme.myshopify.com",
+    "pull": "shopify theme pull -s mpty-theme.myshopify.com",
+    "pull-json": "shopify theme pull -d -o *.json -s mpty-theme.myshopify.com",
+    "share": "shopify theme share -s mpty-theme.myshopify.com",
+    "format": "prettier --write .",
+    "tw": "npx tailwindcss -i ./index.css -o ./assets/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.5.2",
+    "concurrently": "^9.0.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "tailwindcss": "^3.4.13"
+  }
+}

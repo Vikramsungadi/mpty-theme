@@ -1,0 +1,25 @@
+splider-component.splide {
+  position: static;
+}
+
+splider-component.splide .splide__arrows {
+  display: flex;
+  justify-content: space-between;
+  margin-inline: 1rem;
+}
+
+splider-component.splide .splide__arrow {
+  position: static;
+  transform: none;
+  background: transparent;
+}
+
+splider-component.splide .splide__arrow svg {
+  height: 2rem;
+  width: 2rem;
+  fill: white;
+}
+
+splider-component.splide .splide__track {
+  position: static;
+}

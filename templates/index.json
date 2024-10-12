@@ -1,0 +1,68 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_mcJTTd": {
+          "type": "announcement",
+          "settings": {
+            "text": "<p><strong>Announcement 1</strong></p>"
+          }
+        },
+        "announcement_4LmpbY": {
+          "type": "announcement",
+          "settings": {
+            "text": "<p>Announcement 2</p>"
+          }
+        },
+        "announcement_PVJDGc": {
+          "type": "announcement",
+          "settings": {
+            "text": "<p>Announcement 3</p>"
+          }
+        },
+        "announcement_LbtemV": {
+          "type": "announcement",
+          "settings": {
+            "text": "<p>Announcement 4</p>"
+          }
+        },
+        "announcement_H33a8g": {
+          "type": "announcement",
+          "settings": {
+            "text": "<p><em>Announcement 5</em></p>"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_mcJTTd",
+        "announcement_4LmpbY",
+        "announcement_PVJDGc",
+        "announcement_LbtemV",
+        "announcement_H33a8g"
+      ],
+      "settings": {
+        "slide_type": "loop",
+        "slide_per_page": 1,
+        "pagination": false,
+        "arrows": true,
+        "autoplay": true,
+        "autoplay_interval": 3,
+        "padding_top": 10,
+        "padding_bottom": 10
+      }
+    }
+  },
+  "order": [
+    "announcement"
+  ]
+}
