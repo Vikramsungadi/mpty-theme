@@ -1,0 +1,23 @@
+/* Alternate to overlap the content without using position methods */
+.stack-container {
+  display: grid;
+  grid-template-areas: 'overlap';
+}
+
+.stack-item {
+  grid-area: overlap;
+}
+
+/* SVG wrapper for icons */
+.svg-wrapper {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+}
+
+.svg-wrapper > svg {
+  height: 100%;
+  width: 100%;
+}

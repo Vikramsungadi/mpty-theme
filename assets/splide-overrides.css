@@ -1,25 +1,58 @@
+/* Overrides for the Splide component */
+
+/* Container */
 splider-component.splide {
   position: static;
+  display: grid;
+  grid-template-areas: 'stack';
 }
 
-splider-component.splide .splide__arrows {
+/* Arrows container */
+splider-component .splide__arrows {
   display: flex;
   justify-content: space-between;
   margin-inline: 1rem;
+  grid-area: stack;
 }
 
-splider-component.splide .splide__arrow {
+/* Arrow */
+splider-component .splide__arrow {
   position: static;
   transform: none;
   background: transparent;
+  height: auto;
+  width: auto;
+  border: none;
+  border-radius: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1;
 }
 
-splider-component.splide .splide__arrow svg {
+/* Previous arrow */
+splider-component .splide__arrow--prev svg {
+  transform: scaleX(-1);
+}
+
+/* Next arrow */
+splider-component .splide__arrow--next {
+  right: 0;
+}
+
+/* Arrow icon */
+splider-component .splide__arrow svg {
   height: 2rem;
   width: 2rem;
-  fill: white;
+  fill: none;
+  color: white;
 }
 
-splider-component.splide .splide__track {
+/* Track */
+splider-component .splide__track {
+  grid-area: stack;
   position: static;
 }
