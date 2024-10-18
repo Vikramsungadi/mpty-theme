@@ -53,7 +53,7 @@
       "settings": {
         "slide_type": "loop",
         "slide_per_page": 1,
-        "direction": "ltr",
+        "direction": "ttb",
         "pagination": false,
         "arrows": true,
         "autoplay": true,
