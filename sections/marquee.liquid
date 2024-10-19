@@ -3,70 +3,82 @@
   assign padding_bottom = section.settings.padding_bottom
   assign padding_top = section.settings.padding_top
   assign wrapper = 'marquee-wrapper-' | append: id
+  assign icon_position = section.settings.icon_position
+  assign icon_padding = section.settings.icon_padding
+  assign icon_size = section.settings.icon_size
+  assign section_icon = section.settings.section_icon
+  assign font_size = section.settings.text_size
 %}
 
 <style>
   .{{ wrapper }} {
     padding-top: {{ padding_top }}px;
     padding-bottom: {{ padding_bottom }}px;
-  }
-
-  .background-color {
     background-color: {{ section.settings.colors.settings.background }};
+    color: {{ section.settings.colors.settings.text }};
+    font-size: {{ font_size }}px;
   }
 
-  .text-color, splider-component.splide .splide__arrows .splide__arrow svg {
+  @media screen and (max-width:768px) {
+    .{{ wrapper }} {
+      padding-top: {{ padding_top | times: 0.75 }}px;
+      padding-bottom: {{ padding_bottom | times: 0.75 }}px;
+      font-size: {{ font_size | times: 0.5 }}px;
+    }
+  }
+  .{{wrapper}} .text-styles{
+    padding-{{ icon_position }}: {{ icon_padding }}px;
+  }
+
+  splider-component.splide .splide__arrows .splide__arrow svg {
     color: {{ section.settings.colors.settings.text }};
   }
 </style>
 
-{% capture is_vertical %}
-    {% if section.settings.direction == 'ttb' %}
-      true
-    {% else %}
-      false
-    {% endif %}
-{% endcapture %}
-
 {% capture splide_options %}
   {
-    "type": "{{ section.settings.slide_type }}",
-    "perPage": {{ section.settings.slide_per_page }},
-    "pagination": {{ section.settings.pagination }},
+    "type": "loop",
+    "pagination": false,
     "arrows": false,
-    "autoplay": {{ section.settings.autoplay }},
-    "interval": {{ section.settings.autoplay_interval | times: 1000 }},
-    "direction": "{{ section.settings.direction }}",
-    {% if is_vertical %}
-      "height": "2rem",
-    {% endif %}
-    "autoStart": {{ section.settings.auto_scroll }},
+    "autoWidth" : true,
+    "autoStart": true,
+    "gap":"{{ section.settings.gap }}px",
     "autoScroll": {
       "speed": {{ section.settings.auto_scroll_speed }}
     }
   }
 {% endcapture %}
 
-<div class='{{wrapper}} max-w-screen background-color'>
+<div class='{{ wrapper }} max-w-screen background-color'>
   <div class='marquee background-color text-color'>
     <splider-component
-      data-auto-scroll='{{ section.settings.auto_scroll }}'
+      data-auto-scroll='true'
       data-options='{{ splide_options }}'
       class='splide'
     >
-      <div class='splide__arrows {% if is_vertical %}!hidden{% endif %}'>
-        <button class='splide__arrow splide__arrow--prev svg-wrapper'>
-          {{ 'chevron-right.svg' | inline_asset_content }}
-        </button>
-        <button class='splide__arrow splide__arrow--next svg-wrapper'>
-          {{ 'chevron-right.svg' | inline_asset_content }}
-        </button>
-      </div>
       <div class='splide__track'>
         <ul class='splide__list'>
           {% for block in section.blocks %}
+            {% liquid
+              assign text_content = block.settings.text | replace: '<p', '<p class="text-center text-styles"'
+              assign icon = blank
+              assign block_icon = block.settings.block_icon
+
+              if block_icon != blank
+                assign icon = block_icon | image_url: width: icon_size, height: icon_size | image_tag
+              else
+                assign icon = section_icon | image_url: width: icon_size, height: icon_size | image_tag
+              endif
+            %}
+
             <li class='splide__slide flex items-center justify-center'>
-              {{ block.settings.text | replace: '<p', '<p class="text-center text-color"' }}
+              {% if section.settings.icon_position == 'left' %}
+                {{ icon }}
+              {% endif %}
+              {{ text_content }}
+              {% if section.settings.icon_position == 'right' %}
+                {{ icon }}
+              {% endif %}
             </li>
           {% endfor %}
         </ul>
@@ -83,78 +95,16 @@
   "settings": [
     {
       "type": "header",
-      "content": "Slider settings"
-    },
-    {
-      "type": "select",
-      "id": "slide_type",
-      "label": "Slider type",
-      "options": [
-        {
-          "value": "loop",
-          "label": "Loop"
-        },
-        {
-          "value": "fade",
-          "label": "Fade"
-        },
-        {
-          "value": "slide",
-          "label": "Slide"
-        }
-      ]
+      "content": "Settings"
     },
     {
       "type": "range",
-      "id": "slide_per_page",
-      "min": 1,
-      "max": 10,
-      "step": 1,
-      "label": "Slide per page",
-      "default": 1
-    },
-    {
-      "type": "select",
-      "id": "direction",
-      "label": "Direction",
-      "options": [
-        {
-          "value": "ltr",
-          "label": "Horizontal"
-        },
-        {
-          "value": "ttb",
-          "label": "Vertical"
-        }
-      ]
-    },
-    {
-      "type": "checkbox",
-      "id": "pagination",
-      "label": "Show pagination",
-      "default": false,
-      "info": "Enables dots at bottom of slider"
-    },
-    {
-      "type": "checkbox",
-      "id": "arrows",
-      "label": "Enable arrows",
-      "default": true,
-      "info": "Enables arrows button for navigation"
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "label": "Enable Auto play",
-      "default": false,
-      "info": "Auto play the slides"
-    },
-    {
-      "type": "checkbox",
-      "id": "auto_scroll",
-      "label": "Enable Auto scroll",
-      "default": false,
-      "info": "Auto scroll the slides"
+      "id": "gap",
+      "label": "Gap",
+      "min": 5,
+      "max": 100,
+      "default": 5,
+      "step": 1
     },
     {
       "type": "range",
@@ -165,15 +115,58 @@
       "default": 1,
       "step": 0.1
     },
+    { "type": "header", "content": "Text" },
     {
       "type": "range",
-      "id": "autoplay_interval",
-      "label": "Auto play duration",
-      "min": 1,
-      "max": 10,
-      "default": 3,
-      "step": 0.5,
-      "unit": "sec"
+      "id": "text_size",
+      "min": 8,
+      "max": 100,
+      "step": 1,
+      "label": "Size",
+      "default": 20,
+      "unit": "px"
+    },
+
+    { "type": "header", "content": "Icon" },
+    {
+      "type": "image_picker",
+      "id": "section_icon",
+      "label": "image"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "label": "Size",
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "icon_padding",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "label": "Padding",
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "label": "Position",
+      "id": "icon_position",
+      "type": "select",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        }
+      ]
     },
     {
       "type": "header",
@@ -208,13 +201,18 @@
   ],
   "blocks": [
     {
-      "type": "announcement",
-      "name": "Announcement",
+      "type": "Text",
+      "name": "Text",
       "settings": [
         {
           "type": "richtext",
           "id": "text",
           "label": "Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "block_icon",
+          "label": "Icon"
         }
       ]
     }

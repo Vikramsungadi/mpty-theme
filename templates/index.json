@@ -32,8 +32,8 @@
       "settings": {
         "slide_type": "loop",
         "slide_per_page": 1,
-        "arrows": true,
-        "sticky": true,
+        "arrows": false,
+        "sticky": false,
         "autoplay": true,
         "autoplay_interval": 3,
         "direction": "ttb",
@@ -42,9 +42,71 @@
         "padding_bottom": 10,
         "colors": "scheme-4"
       }
+    },
+    "marquee_ywHkrR": {
+      "type": "marquee",
+      "blocks": {
+        "text_wWDGFQ": {
+          "type": "Text",
+          "settings": {
+            "text": "<p>50% OFF ON HOTTEST TRENDS</p>"
+          }
+        },
+        "text_D4TCfk": {
+          "type": "Text",
+          "settings": {
+            "text": "<p>50% OFF ON HOTTEST TRENDS</p>"
+          }
+        },
+        "text_enApCK": {
+          "type": "Text",
+          "settings": {
+            "text": "<p>50% OFF ON HOTTEST TRENDS</p>"
+          }
+        },
+        "text_ki6pxK": {
+          "type": "Text",
+          "settings": {
+            "text": "<p>50% OFF ON HOTTEST TRENDS</p>"
+          }
+        },
+        "text_XAYLNY": {
+          "type": "Text",
+          "settings": {
+            "text": "<p>50% OFF ON HOTTEST TRENDS</p>"
+          }
+        },
+        "text_69z4Mn": {
+          "type": "Text",
+          "settings": {
+            "text": "<p>50% OFF ON HOTTEST TRENDS</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_wWDGFQ",
+        "text_D4TCfk",
+        "text_enApCK",
+        "text_ki6pxK",
+        "text_XAYLNY",
+        "text_69z4Mn"
+      ],
+      "settings": {
+        "gap": 30,
+        "auto_scroll_speed": 1,
+        "text_size": 32,
+        "section_icon": "shopify://shop_images/star.png",
+        "icon_size": 32,
+        "icon_padding": 10,
+        "icon_position": "left",
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "colors": "scheme-5"
+      }
     }
   },
   "order": [
-    "announcement"
+    "announcement",
+    "marquee_ywHkrR"
   ]
 }

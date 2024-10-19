@@ -30,6 +30,7 @@ class SpliderComponent extends HTMLElement {
     this.addExtensions();
 
     this.splide = new Splide(this, this.options).mount(this.addedExtensions);
+    console.log('this.splide', this.splide);
   }
 }
 

@@ -14,6 +14,12 @@
     color: {{ section.settings.colors.settings.text }};
   }
 
+  @media screen and (max-width:768px) {
+    .{{ wrapper }} {
+      padding-top: {{ padding_top | times: 0.75 }}px;
+      padding-bottom: {{ padding_bottom | times: 0.75 }}px;
+    }
+  }
   splider-component.splide .splide__arrows .splide__arrow svg {
      color: {{ section.settings.colors.settings.text }};
   }
@@ -64,7 +70,7 @@
         <ul class='splide__list'>
           {% for block in section.blocks %}
             <li class='splide__slide flex items-center justify-center'>
-              {{ block.settings.text | replace: '<p', '<p class="text-center text-color"' }}
+              {{ block.settings.text | replace: '<p', '<p class="text-center"' }}
             </li>
           {% endfor %}
         </ul>
