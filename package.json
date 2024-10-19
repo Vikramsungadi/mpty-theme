@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "shopify theme dev -s mpty-theme.myshopify.com",
     "dev-sync": "shopify theme dev --theme-editor-sync -s mpty-theme.myshopify.com",
+    "start": "shopify theme dev --theme-editor-sync -s mpty-theme.myshopify.com",
     "pull": "shopify theme pull -s mpty-theme.myshopify.com",
     "pull-json": "shopify theme pull -d -o *.json -s mpty-theme.myshopify.com",
     "share": "shopify theme share -s mpty-theme.myshopify.com",
