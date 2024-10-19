@@ -2,20 +2,21 @@
   assign id = section.id
   assign padding_bottom = section.settings.padding_bottom
   assign padding_top = section.settings.padding_top
-  assign wrapper = 'announcement-bar-wrapper-' | append: id
+  assign wrapper = 'marquee-wrapper-' | append: id
 %}
 
 <style>
   .{{ wrapper }} {
     padding-top: {{ padding_top }}px;
     padding-bottom: {{ padding_bottom }}px;
-    background-color: {{ section.settings.colors.settings.background }};
-    border-bottom: 1px solid {{ section.settings.colors.settings.text |  color_modify: "alpha", 0.1 }};
-    color: {{ section.settings.colors.settings.text }};
   }
 
-  splider-component.splide .splide__arrows .splide__arrow svg {
-     color: {{ section.settings.colors.settings.text }};
+  .background-color {
+    background-color: {{ section.settings.colors.settings.background }};
+  }
+
+  .text-color, splider-component.splide .splide__arrows .splide__arrow svg {
+    color: {{ section.settings.colors.settings.text }};
   }
 </style>
 
@@ -31,24 +32,25 @@
   {
     "type": "{{ section.settings.slide_type }}",
     "perPage": {{ section.settings.slide_per_page }},
-    "pagination": false,
-    "arrows": {{ section.settings.arrows }},
+    "pagination": {{ section.settings.pagination }},
+    "arrows": false,
     "autoplay": {{ section.settings.autoplay }},
     "interval": {{ section.settings.autoplay_interval | times: 1000 }},
     "direction": "{{ section.settings.direction }}",
     {% if is_vertical %}
-      "height": "{{ section.settings.height }}px"
+      "height": "2rem",
     {% endif %}
+    "autoStart": {{ section.settings.auto_scroll }},
+    "autoScroll": {
+      "speed": {{ section.settings.auto_scroll_speed }}
+    }
   }
 {% endcapture %}
 
-{% capture sticky_classes %}
-{% if section.settings.sticky %} sticky top-0 {% endif %}
-{% endcapture %}
-
-<div class='{{wrapper}} max-w-screen {{ sticky_classes }}'>
-  <div class='announcement-bar'>
+<div class='{{wrapper}} max-w-screen background-color'>
+  <div class='marquee background-color text-color'>
     <splider-component
+      data-auto-scroll='{{ section.settings.auto_scroll }}'
       data-options='{{ splide_options }}'
       class='splide'
     >
@@ -75,8 +77,8 @@
 
 {% schema %}
 {
-  "name": "Announcement Bar",
-  "class": "announcement-bar",
+  "name": "Marquee",
+  "class": "marquee",
   "tag": "section",
   "settings": [
     {
@@ -112,37 +114,6 @@
       "default": 1
     },
     {
-      "type": "checkbox",
-      "id": "arrows",
-      "label": "Enable arrows",
-      "default": true,
-      "info": "Enables arrows button for navigation"
-    },
-    {
-      "type": "checkbox",
-      "id": "sticky",
-      "label": "Sticky",
-      "default": true,
-      "info": "Sticks to top"
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "label": "Enable Auto play",
-      "default": false,
-      "info": "Auto play the slides"
-    },
-    {
-      "type": "range",
-      "id": "autoplay_interval",
-      "label": "Auto play duration",
-      "min": 1,
-      "max": 10,
-      "default": 3,
-      "step": 0.5,
-      "unit": "sec"
-    },
-    {
       "type": "select",
       "id": "direction",
       "label": "Direction",
@@ -158,15 +129,51 @@
       ]
     },
     {
+      "type": "checkbox",
+      "id": "pagination",
+      "label": "Show pagination",
+      "default": false,
+      "info": "Enables dots at bottom of slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows",
+      "label": "Enable arrows",
+      "default": true,
+      "info": "Enables arrows button for navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable Auto play",
+      "default": false,
+      "info": "Auto play the slides"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_scroll",
+      "label": "Enable Auto scroll",
+      "default": false,
+      "info": "Auto scroll the slides"
+    },
+    {
       "type": "range",
-      "id": "height",
-      "min": 20,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "Height",
-      "info": "Works only Vertical direction is enabled.",
-      "default": 20
+      "id": "auto_scroll_speed",
+      "label": "Auto scroll speed",
+      "min": 0.1,
+      "max": 5,
+      "default": 1,
+      "step": 0.1
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "label": "Auto play duration",
+      "min": 1,
+      "max": 10,
+      "default": 3,
+      "step": 0.5,
+      "unit": "sec"
     },
     {
       "type": "header",
@@ -214,7 +221,7 @@
   ],
   "presets": [
     {
-      "name": "Announcement Bar"
+      "name": "Marquee"
     }
   ]
 }

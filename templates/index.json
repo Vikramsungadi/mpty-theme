@@ -15,54 +15,32 @@
         "announcement_mcJTTd": {
           "type": "announcement",
           "settings": {
-            "text": "<p><strong>Announcement 1</strong></p>"
+            "text": "<p>Welcome to <strong>MPTY </strong>theme</p>"
           }
         },
-        "announcement_4LmpbY": {
+        "announcement_wTL3aU": {
           "type": "announcement",
           "settings": {
-            "text": "<p>Announcement 2</p>"
-          }
-        },
-        "announcement_PVJDGc": {
-          "type": "announcement",
-          "settings": {
-            "text": "<p>Announcement 3</p>"
-          }
-        },
-        "announcement_LbtemV": {
-          "type": "announcement",
-          "settings": {
-            "text": "<p>Announcement 4</p>"
-          }
-        },
-        "announcement_H33a8g": {
-          "type": "announcement",
-          "settings": {
-            "text": "<p><em>Announcement 5</em></p>"
+            "text": "<p>Fill whatever you need.</p>"
           }
         }
       },
       "block_order": [
         "announcement_mcJTTd",
-        "announcement_4LmpbY",
-        "announcement_PVJDGc",
-        "announcement_LbtemV",
-        "announcement_H33a8g"
+        "announcement_wTL3aU"
       ],
       "settings": {
         "slide_type": "loop",
         "slide_per_page": 1,
-        "direction": "ttb",
-        "pagination": false,
         "arrows": true,
+        "sticky": true,
         "autoplay": true,
-        "auto_scroll": false,
-        "auto_scroll_speed": 1,
         "autoplay_interval": 3,
+        "direction": "ttb",
+        "height": 20,
         "padding_top": 10,
         "padding_bottom": 10,
-        "colors": ""
+        "colors": "scheme-4"
       }
     }
   },

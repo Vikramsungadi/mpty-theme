@@ -2,7 +2,7 @@
 
 ## Prerequisites to run shopify theme locally
 
-- Node.js (v18.17.1 or higher)
+- Node.js (18.20+, 20.10 or higher)
 - Shopify CLI
 - A valid Shopify store for theme development
 
@@ -41,4 +41,30 @@
 
 ---
 
-This list will be updated regularly as development progresses.
+## Commit Message Guidelines
+
+We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification to maintain a clear and consistent commit history.
+
+### Common Types:
+
+- **feat**: Adds a new feature.
+- **fix**: Fixes a bug.
+- **docs**: Documentation changes.
+- **style**: Code style changes (formatting, etc.).
+- **refactor**: Code refactoring without changing features or fixing bugs.
+- **test**: Adds or updates tests.
+- **chore**: Routine tasks like updating build processes, package management, or tools.
+
+### Example
+
+- feat(auth): add user login functionality
+- fix(cart): correct price calculation for discounts
+- docs(readme): update installation instructions
+
+### Breaking Changes:
+
+Include `BREAKING CHANGE:` in the commit body when a major breaking change is introduced.
+
+### Example
+
+- BREAKING CHANGE: The /auth/login endpoint has been removed in favor of OAuth.

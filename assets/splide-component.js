@@ -1,6 +1,8 @@
 class SpliderComponent extends HTMLElement {
   constructor() {
     super();
+    this.options = {};
+    this.addedExtensions = {};
   }
 
   connectedCallback() {
@@ -11,13 +13,12 @@ class SpliderComponent extends HTMLElement {
 
   extractOptions() {
     this.options = JSON.parse(this.dataset.options || '{}');
-    this.autoScroll = JSON.parse(this.dataset.autoScroll || 'null');
+    this.autoScroll = this.dataset.autoScroll === 'true';
   }
 
   addExtensions() {
-    if (this.splideExtensions) {
-      this.splideExtensions = window.splide.Extensions;
-    }
+    this.splideExtensions = window.splide.Extensions;
+    this.addedExtensions.Intersection = this.splideExtensions.Intersection;
 
     if (this.autoScroll) {
       this.addedExtensions.AutoScroll = this.splideExtensions.AutoScroll;
