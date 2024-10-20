@@ -1,0 +1,24 @@
+{% liquid
+  assign image = _image
+  assign fetchpriority = _fetchpriority | default: 'auto'
+  assign height = _height | default: 'auto'
+
+  assign breakpoints = '1440,1200,800,450,380' | split: ','
+%}
+
+<picture>
+  {% for width in breakpoints %}
+    <source
+      srcset='{{ image  | image_url: width: width }}'
+      media='(min-width: {{ width }}px)'
+    >
+  {% endfor %}
+
+  <img
+    src='{{ image | image_url }}'
+    width='100%'
+    height='{{ height }}'
+    fetchpriority='{{ fetchpriority }}'
+    alt='{{ image.alt | default: '' }}'
+  >
+</picture>
