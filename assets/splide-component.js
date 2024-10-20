@@ -13,7 +13,26 @@ class SpliderComponent extends HTMLElement {
 
   extractOptions() {
     this.options = JSON.parse(this.dataset.options || '{}');
-    this.autoScroll = this.dataset.autoScroll === 'true';
+    this.autoScroll = Object.hasOwn(this.dataset, 'autoScroll');
+    this.playOnIntersection = Object.hasOwn(this.dataset, 'playOnView');
+
+    if (this.playOnIntersection) {
+      this.options = {
+        ...this.options,
+        intersection: {
+          inView: {
+            autoScroll: true,
+            autoplay: true
+          },
+          outView: {
+            autoScroll: false,
+            autoplay: false
+          }
+        }
+      };
+    }
+
+    console.log('this.options', this.options);
   }
 
   addExtensions() {
@@ -30,7 +49,6 @@ class SpliderComponent extends HTMLElement {
     this.addExtensions();
 
     this.splide = new Splide(this, this.options).mount(this.addedExtensions);
-    console.log('this.splide', this.splide);
   }
 }
 

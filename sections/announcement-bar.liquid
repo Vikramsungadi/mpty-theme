@@ -39,7 +39,9 @@
     "perPage": {{ section.settings.slide_per_page }},
     "pagination": false,
     "arrows": {{ section.settings.arrows }},
-    "autoplay": {{ section.settings.autoplay }},
+    {% if section.settings.autoplay %}
+    "autoplay": "pause",
+    {% endif %}
     "interval": {{ section.settings.autoplay_interval | times: 1000 }},
     "direction": "{{ section.settings.direction }}",
     {% if is_vertical %}
@@ -55,6 +57,7 @@
 <div class='{{wrapper}} max-w-screen {{ sticky_classes }}'>
   <div class='announcement-bar'>
     <splider-component
+      data-play-on-view
       data-options='{{ splide_options }}'
       class='splide'
     >
