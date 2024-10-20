@@ -54,6 +54,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0
 - **refactor**: Code refactoring without changing features or fixing bugs.
 - **test**: Adds or updates tests.
 - **chore**: Routine tasks like updating build processes, package management, or tools.
+- **json**: for json(customiser) changes.
 
 ### Example
 
