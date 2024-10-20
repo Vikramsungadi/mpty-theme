@@ -7,15 +7,6 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "announcement": {
@@ -50,6 +41,42 @@
         "padding_top": 10,
         "padding_bottom": 10,
         "colors": "scheme-4"
+      }
+    },
+    "media_banner_KkjMQP": {
+      "type": "media-banner",
+      "blocks": {
+        "image_8cfX4j": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Hero-banner.webp"
+          }
+        },
+        "overlay_HQFJet": {
+          "type": "overlay",
+          "settings": {
+            "background": "linear-gradient(182deg, rgba(18, 18, 18, 0.5) 11%, rgba(18, 18, 18, 0.4) 84%)"
+          }
+        },
+        "text_VYrKcD": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Explore our best sellers</strong></p>",
+            "button_label": "",
+            "url": "",
+            "text_color": "#ffffff",
+            "position": "center-center"
+          }
+        }
+      },
+      "block_order": [
+        "image_8cfX4j",
+        "overlay_HQFJet",
+        "text_VYrKcD"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "marquee_ywHkrR": {
@@ -116,6 +143,7 @@
   },
   "order": [
     "announcement",
+    "media_banner_KkjMQP",
     "marquee_ywHkrR"
   ]
 }

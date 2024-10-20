@@ -1,0 +1,211 @@
+{% comment %} <script src='{{ 'media-banner.js' | asset_url }}' defer></script> {% endcomment %}
+
+{% liquid
+  assign id = section.id
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_top = section.settings.padding_top
+  assign wrapper = 'media-banner-wrapper-' | append: id
+%}
+
+<style>
+  .{{wrapper}} {
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+  }
+
+
+  @media screen and (max-width:768px) {
+    .{{ wrapper }} {
+      padding-top: {{ padding_top | times: 0.75 }}px;
+      padding-bottom: {{ padding_bottom | times: 0.75 }}px;
+    }
+  }
+</style>
+
+<div class='{{wrapper}}'>
+  <div class='media-banner-wrapper stack-container'>
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'image' %}
+          <div class='stack-item'>
+            {% render 'image', _image: block.settings.image %}
+          </div>
+        {% when 'text' %}
+          <div
+            style='color:{{ block.settings.text_color }};'
+            class='stack-item text-wrapper flex {{ block.settings.position }}'
+          >
+            {{ block.settings.text | replace: '<p', '<p class="text-[52px]"' }}
+          </div>
+
+        {% when 'overlay' %}
+          <div
+            style='background:{{ block.settings.background }};'
+            class='stack-item h-full w-full'
+          ></div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Media banner",
+  "class": "media-banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Padding settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "3840 x 2160 is recommended"
+        },
+        {
+          "type": "range",
+          "id": "image_height",
+          "label": "Height",
+          "default": 700,
+          "min": 50,
+          "max": 1200,
+          "step": 5,
+          "unit": "Unit"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Url"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "label": "Top Left",
+              "value": "top-left"
+            },
+            {
+              "label": "Top Center",
+              "value": "top-center"
+            },
+            {
+              "label": "Top Right",
+              "value": "top-right"
+            },
+            {
+              "label": "Center Left",
+              "value": "center-left"
+            },
+            {
+              "label": "Center Center",
+              "value": "center-center"
+            },
+            {
+              "label": "Center Right",
+              "value": "center-right"
+            },
+            {
+              "label": "Bottom Left",
+              "value": "bottom-left"
+            },
+            {
+              "label": "Bottom Center",
+              "value": "bottom-center"
+            },
+            {
+              "label": "Bottom Right",
+              "value": "bottom-right"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        }
+      ]
+    },
+    {
+      "type": "video_url",
+      "name": "Video Url",
+      "settings": [
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "Video Url",
+          "accept": ["youtube", "vimeo"]
+        }
+      ]
+    },
+    {
+      "type": "overlay",
+      "name": "Overlay",
+      "settings": [
+        {
+          "type": "color_background",
+          "id": "background",
+          "label": "Overlay"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Media banner" }]
+}
+{% endschema %}

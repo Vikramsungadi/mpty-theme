@@ -1,11 +1,11 @@
 /* Alternate to overlap the content without using position methods */
 .stack-container {
   display: grid;
-  grid-template-areas: 'overlap';
+  grid-template-areas: 'stack';
 }
 
 .stack-item {
-  grid-area: overlap;
+  grid-area: stack;
 }
 
 /* SVG wrapper for icons */
@@ -20,4 +20,52 @@
 .svg-wrapper > svg {
   height: 100%;
   width: 100%;
+}
+
+/* postions */
+/* Flexbox Positioning Classes */
+
+.top-left {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.top-center {
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.top-right {
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.center-left {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.center-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.center-right {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.bottom-left {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.bottom-center {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.bottom-right {
+  justify-content: flex-end;
+  align-items: flex-end;
 }

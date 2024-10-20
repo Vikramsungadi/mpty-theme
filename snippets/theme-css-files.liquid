@@ -1,4 +1,5 @@
 {% render 'default-css' %}
+{{ 'utils.css' | asset_url | stylesheet_tag }}
 {{ 'base.css' | asset_url | stylesheet_tag }}
 {{ 'splide.min.css' | asset_url | stylesheet_tag }}
 {{ 'splide-overrides.css' | asset_url | stylesheet_tag }}
