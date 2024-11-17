@@ -1,24 +1,58 @@
 {% liquid
   assign image = _image
+  assign mobile_image = _mobile_image | default: image
   assign fetchpriority = _fetchpriority | default: 'auto'
-  assign height = _height | default: 'auto'
-
+  assign adapt = _adapt
   assign breakpoints = '1440,1200,800,450,380' | split: ','
-%}
 
-<picture>
+  if adapt
+    assign height = image.height | divided_by: image.aspect_ratio
+    assign mobile_height = height
+  else
+    assign height = _height | default: 'auto'
+    assign mobile_height = _mobile_height | default: height
+  endif
+%}
+<style>
+  picture._{{ image.id }}, picture._{{ image.id }} img  {
+    height: {{ mobile_height }}px;
+  }
+
+  {% unless adapt %}
+  @media screen and (min-width: 768px) {
+    picture._{{ image.id }}, picture._{{ image.id }} img {
+      height: {{ height }}px;
+    }
+  }
+  {% endunless %}
+</style>
+
+<picture class='overflow-hidden _{{ image.id }}'>
   {% for width in breakpoints %}
+    {% liquid
+      assign width_num = width | plus: 0
+      assign image_object = image
+      assign image_height = height
+
+      if width_num < 800
+        assign image_object = mobile_image
+        assign image_height = mobile_height
+      endif
+    %}
     <source
-      srcset='{{ image  | image_url: width: width }}'
-      media='(min-width: {{ width }}px)'
+      srcset='{{ image_object  | image_url: width: width, height: image_height }}'
+      media='(max-width: {{ width }}px)'
     >
   {% endfor %}
 
-  <img
-    src='{{ image | image_url }}'
-    width='100%'
-    height='{{ height }}'
-    fetchpriority='{{ fetchpriority }}'
-    alt='{{ image.alt | default: '' }}'
-  >
+  {% if image %}
+    <img
+      src='{{ image | image_url }}'
+      width='100%'
+      height='auto'
+      class='object-cover object-top'
+      fetchpriority='{{ fetchpriority }}'
+      alt='{{ image.alt | default: '' }}'
+    >
+  {% endif %}
 </picture>

@@ -49,7 +49,10 @@
         "image_8cfX4j": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Hero-banner.webp"
+            "image": "shopify://shop_images/Hero-banner.webp",
+            "adapt": true,
+            "image_height": 600,
+            "image_height_mobile": 725
           }
         },
         "overlay_HQFJet": {

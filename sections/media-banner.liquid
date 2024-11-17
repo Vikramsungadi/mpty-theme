@@ -28,14 +28,19 @@
       {% case block.type %}
         {% when 'image' %}
           <div class='stack-item'>
-            {% render 'image', _image: block.settings.image %}
+            {% render 'image',
+              _image: block.settings.image,
+              _height: block.settings.image_height,
+              _mobile_height: block.settings.image_height_mobile,
+              _adapt: block.settings.adapt
+            %}
           </div>
         {% when 'text' %}
           <div
             style='color:{{ block.settings.text_color }};'
             class='stack-item text-wrapper flex {{ block.settings.position }}'
           >
-            {{ block.settings.text | replace: '<p', '<p class="text-[52px]"' }}
+            {{ block.settings.text | replace: '<p', '<p class="text-[52px] text-center"' }}
           </div>
 
         {% when 'overlay' %}
@@ -91,14 +96,30 @@
           "info": "3840 x 2160 is recommended"
         },
         {
+          "type": "checkbox",
+          "id": "adapt",
+          "label": "Adaptive image",
+          "default": true
+        },
+        {
           "type": "range",
           "id": "image_height",
           "label": "Height",
           "default": 700,
           "min": 50,
           "max": 1200,
-          "step": 5,
-          "unit": "Unit"
+          "step": 25,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "image_height_mobile",
+          "label": "Mobile height",
+          "default": 500,
+          "min": 50,
+          "max": 1200,
+          "step": 25,
+          "unit": "px"
         }
       ]
     },
