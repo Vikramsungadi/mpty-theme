@@ -49,7 +49,8 @@
         "image_8cfX4j": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Hero-banner.webp"
+            "image": "shopify://shop_images/Hero-banner.webp",
+            "image_height": 630
           }
         },
         "overlay_HQFJet": {
@@ -139,11 +140,78 @@
         "padding_bottom": 10,
         "colors": "scheme-5"
       }
+    },
+    "media_banner_pjh6tF": {
+      "type": "media-banner",
+      "blocks": {
+        "video_Q7pHgi": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/2288346-hd_1280_720_25fps.mp4",
+            "video_height": "auto",
+            "autoplay": true,
+            "loop": true,
+            "muted": true,
+            "controls": false
+          }
+        },
+        "overlay_nwRKLc": {
+          "type": "overlay",
+          "settings": {
+            "background": "linear-gradient(228deg, rgba(152, 152, 152, 0.47) 2%, rgba(103, 90, 95, 0.4) 100%)"
+          }
+        },
+        "text_WXWkwj": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Video Text Overlay</strong></p>",
+            "button_label": "Explore",
+            "url": "shopify://pages/contact",
+            "text_color": "#000000",
+            "position": "center-center"
+          }
+        }
+      },
+      "block_order": [
+        "video_Q7pHgi",
+        "overlay_nwRKLc",
+        "text_WXWkwj"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "media_banner_ghX9mV": {
+      "type": "media-banner",
+      "blocks": {
+        "video_url_K7cLig": {
+          "type": "video_url",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "autoplay": false,
+            "loop": false,
+            "muted": false,
+            "height": 500,
+            "width": "1280px",
+            "aspect_ratio": "1280/720"
+          }
+        }
+      },
+      "block_order": [
+        "video_url_K7cLig"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
     "announcement",
     "media_banner_KkjMQP",
-    "marquee_ywHkrR"
+    "marquee_ywHkrR",
+    "media_banner_pjh6tF",
+    "media_banner_ghX9mV"
   ]
 }

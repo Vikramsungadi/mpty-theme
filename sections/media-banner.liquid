@@ -28,21 +28,47 @@
       {% case block.type %}
         {% when 'image' %}
           <div class='stack-item'>
-            {% render 'image', _image: block.settings.image %}
+            {% render 'image', _image: block.settings.image, _height: block.settings.image_height %}
           </div>
+
         {% when 'text' %}
           <div
             style='color:{{ block.settings.text_color }};'
-            class='stack-item text-wrapper flex {{ block.settings.position }}'
-          >
+            class='stack-item text-wrapper flex {{ block.settings.position }}'>
             {{ block.settings.text | replace: '<p', '<p class="text-[52px]"' }}
           </div>
 
         {% when 'overlay' %}
           <div
             style='background:{{ block.settings.background }};'
-            class='stack-item h-full w-full'
-          ></div>
+            class='stack-item h-full w-full'></div>
+
+        {% when 'video' %}
+          <div class='stack-item'>
+            {% render 'video',
+              _video: block.settings.video,
+              _height: block.settings.video_height,
+              _autoplay: block.settings.autoplay,
+              _controls: block.settings.controls,
+              _loop: block.settings.loop,
+              _muted: block.settings.muted
+            %}
+          </div>
+
+          {% comment %}
+            {% when 'video_url' %}
+            <div class='stack-item'>
+              {% render 'video_external',
+                _video_url: block.settings.video_url,
+                _autoplay: block.settings.autoplay,
+                _loop: block.settings.loop,
+                _muted: block.settings.muted,
+                _height: block.settings.height,
+                _max_width: block.settings.width,
+                _aspect_ratio: block.settings.aspect_ratio
+              %}
+            </div>
+          {% endcomment %}
       {% endcase %}
     {% endfor %}
   </div>
@@ -95,10 +121,10 @@
           "id": "image_height",
           "label": "Height",
           "default": 700,
-          "min": 50,
-          "max": 1200,
-          "step": 5,
-          "unit": "Unit"
+          "min": 200,
+          "max": 1000,
+          "step": 10,
+          "unit": "px"
         }
       ]
     },
@@ -179,19 +205,71 @@
           "type": "video",
           "id": "video",
           "label": "Video"
+        },
+        {
+          "type": "text",
+          "id": "video_height",
+          "label": "Height (px)",
+          "default": "auto",
+          "info": "use 'auto' if auto-fit is needed."
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Autoplay",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "loop",
+          "label": "Loop",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "muted",
+          "label": "Muted",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "controls",
+          "label": "Show Controls",
+          "default": false
         }
       ]
     },
     {
+      "name": "External Video",
       "type": "video_url",
-      "name": "Video Url",
       "settings": [
         {
           "type": "video_url",
           "id": "video_url",
-          "label": "Video Url",
+          "label": "Video URL",
           "accept": ["youtube", "vimeo"]
-        }
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Autoplay",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "loop",
+          "label": "Loop",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "muted",
+          "label": "Muted",
+          "default": false
+        },
+        { "type": "number", "id": "height", "label": "Height", "default": 700 },
+        { "type": "text", "id": "width", "label": "Width", "default": "100%" },
+        { "type": "text", "id": "aspect_ratio", "label": "Aspect ratio", "default": "1280/720" }
       ]
     },
     {

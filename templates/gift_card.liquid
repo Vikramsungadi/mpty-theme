@@ -14,8 +14,7 @@
       <link
         rel='icon'
         type='image/png'
-        href='{{ settings.favicon | image_url: width: 32, height: 32 }}'
-      >
+        href='{{ settings.favicon | image_url: width: 32, height: 32 }}'>
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? -%}
@@ -102,8 +101,7 @@
         as='font'
         href='{{ settings.type_body_font | font_url }}'
         type='font/woff2'
-        crossorigin
-      >
+        crossorigin>
       {% comment %}theme-check-enable AssetPreload{% endcomment %}
     {%- endunless -%}
     {%- unless settings.type_header_font.system? -%}
@@ -113,8 +111,7 @@
         as='font'
         href='{{ settings.type_header_font | font_url }}'
         type='font/woff2'
-        crossorigin
-      >
+        crossorigin>
       {% comment %}theme-check-enable AssetPreload{% endcomment %}
     {%- endunless -%}
 
@@ -147,11 +144,7 @@
       <div class='gift-card__image-wrapper'>
         {%- if settings.logo != blank -%}
           {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-          {{
-            settings.logo
-            | image_url: width: 570
-            | image_tag: class: 'gift-card__image', alt: logo_alt
-          }}
+          {{ settings.logo | image_url: width: 570 | image_tag: class: 'gift-card__image', alt: logo_alt }}
         {%- else %}
           <img
             class='gift-card__image'
@@ -159,8 +152,7 @@
             alt=''
             height='{{ 570 | divided_by: 1.5 }}'
             width='570'
-            loading='eager'
-          >
+            loading='eager'>
         {%- endif %}
       </div>
       <h2>{{ shop.name }}</h2>
@@ -176,8 +168,7 @@
             width='120'
             height='40'
             alt='{{ 'gift_cards.issued.add_to_apple_wallet' | t }}'
-            loading='lazy'
-          >
+            loading='lazy'>
         </a>
       {%- endif -%}
       <div class='gift-card__buttons no-print'>
@@ -196,8 +187,7 @@
           class='button button--secondary'
           target='_blank'
           rel='noopener'
-          aria-describedby='a11y-new-window-message'
-        >
+          aria-describedby='a11y-new-window-message'>
           {{ 'gift_cards.issued.shop_link' | t }}
         </a>
       </div>

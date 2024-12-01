@@ -1,0 +1,24 @@
+{% liquid
+  assign video = _video
+  assign autoplay = _autoplay | default: false
+  assign loop = _loop | default: false
+  assign muted = _muted | default: false
+  assign controls = _controls | default: false
+  assign height = _height | strip | default: 'auto'
+  assign style = ''
+
+  unless height == 'auto'
+    assign style = 'max-height:' | append: height
+  endunless
+%}
+
+{{
+  video
+  | video_tag:
+    loop: loop,
+    muted: muted,
+    autoplay: autoplay,
+    controls: controls,
+    style: style,
+    class: 'h-full w-full object-cover'
+}}

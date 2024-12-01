@@ -6,19 +6,17 @@
   assign breakpoints = '1440,1200,800,450,380' | split: ','
 %}
 
-<picture>
+<picture style='max-height:{{ height }}px' class='h-full overflow-hidden object-cover'>
   {% for width in breakpoints %}
     <source
       srcset='{{ image  | image_url: width: width }}'
-      media='(min-width: {{ width }}px)'
-    >
+      media='(min-width: {{ width }}px)'>
   {% endfor %}
 
   <img
     src='{{ image | image_url }}'
     width='100%'
-    height='{{ height }}'
+    height='{{- height -}}{%- unless height == "auto" -%}px{%- endunless -%}'
     fetchpriority='{{ fetchpriority }}'
-    alt='{{ image.alt | default: '' }}'
-  >
+    alt='{{ image.alt | default: '' }}'>
 </picture>
