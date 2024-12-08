@@ -1,0 +1,56 @@
+{% liquid
+  assign video_host = _video_url.type
+  assign video_params = ''
+
+  # Use passed parameters, fallback to defaults
+  assign video_url = _video_url | default: ''
+  assign autoplay = _autoplay | default: false
+  assign loop = _loop | default: false
+  assign muted = _muted | default: false
+  assign max_width = _max_width | default: '100%'
+  assign aspect_ratio = _aspect_ratio | default: '16 / 9'
+
+  # Build the parameters based on the conditions
+  if video_host == 'youtube'
+    assign video_params = 'controls=1'
+    if autoplay
+      assign video_params = video_params | append: '&autoplay=1'
+    endif
+    if loop
+      assign video_params = video_params | append: '&loop=1'
+    endif
+    if muted
+      assign video_params = video_params | append: '&mute=1'
+    endif
+
+    # Use the YouTube embed URL format
+    assign video_url = 'https://www.youtube.com/embed/' | append: _video_url.id
+  elsif video_host == 'vimeo'
+    assign video_params = 'controls=1'
+    if autoplay
+      assign video_params = video_params | append: '&autoplay=1'
+    endif
+    if loop
+      assign video_params = video_params | append: '&loop=1'
+    endif
+    if muted
+      assign video_params = video_params | append: '&muted=1'
+    endif
+  endif
+%}
+
+{% if video_host %}
+  <div
+    class='responsive-video-container relative h-0'
+    data-aspect-ratio='{{ aspect_ratio }}'
+    data-max-width='{{ max_width }}'>
+    <iframe
+      class='absolute left-0 top-0 block size-full'
+      src='{{ video_url | append: '?' | append: video_params }}'
+      frameborder='0'
+      allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+      allowfullscreen></iframe>
+  </div>
+{% else %}
+  <p>Please provide a valid YouTube or Vimeo URL.</p>
+{% endif %}

@@ -49,14 +49,14 @@
         "image_8cfX4j": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Hero-banner.webp",
-            "image_height": 630
+            "desktop_image": "shopify://shop_images/classic-neon-open-sign.jpg",
+            "mobile_image": "shopify://shop_images/Hero-banner.webp"
           }
         },
         "overlay_HQFJet": {
           "type": "overlay",
           "settings": {
-            "background": "linear-gradient(182deg, rgba(18, 18, 18, 0.5) 11%, rgba(18, 18, 18, 0.4) 84%)"
+            "background": "linear-gradient(88deg, rgba(18, 18, 18, 0.89) 11%, rgba(18, 18, 18, 0.4) 84%)"
           }
         },
         "text_VYrKcD": {
@@ -66,6 +66,8 @@
             "button_label": "",
             "url": "",
             "text_color": "#ffffff",
+            "text_size_desktop": 72,
+            "text_size_mobile": 32,
             "position": "center-center"
           }
         }
@@ -168,6 +170,8 @@
             "button_label": "Explore",
             "url": "shopify://pages/contact",
             "text_color": "#000000",
+            "text_size_desktop": 52,
+            "text_size_mobile": 32,
             "position": "center-center"
           }
         }

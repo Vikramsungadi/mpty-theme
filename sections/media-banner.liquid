@@ -8,17 +8,16 @@
 %}
 
 <style>
-  .{{wrapper}} {
+  .{{ wrapper }} {
     padding-top: {{ padding_top }}px;
     padding-bottom: {{ padding_bottom }}px;
   }
-
-
   @media screen and (max-width:768px) {
     .{{ wrapper }} {
-      padding-top: {{ padding_top | times: 0.75 }}px;
-      padding-bottom: {{ padding_bottom | times: 0.75 }}px;
+      padding-top: {{ padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ padding_bottom | times: 0.75 | round }}px;
     }
+
   }
 </style>
 
@@ -28,14 +27,28 @@
       {% case block.type %}
         {% when 'image' %}
           <div class='stack-item'>
-            {% render 'image', _image: block.settings.image, _height: block.settings.image_height %}
+            {% render 'image',
+              _class: 'md:aspect-[16/9] object-cover aspect-[800/1200]',
+              _desktop_image: block.settings.desktop_image,
+              _mobile_image: block.settings.mobile_image
+            %}
           </div>
 
         {% when 'text' %}
+          <style>
+            .{{ wrapper }} .text-wrapper {
+              font-size: {{ block.settings.text_size_desktop }}px;
+              color: {{ block.settings.text_color }}
+            }
+            @media screen and (max-width:768px) {
+              .{{ wrapper }} .text-wrapper{
+                font-size: {{ block.settings.text_size_mobile }}px;
+              }
+            }
+          </style>
           <div
-            style='color:{{ block.settings.text_color }};'
             class='stack-item text-wrapper flex {{ block.settings.position }}'>
-            {{ block.settings.text | replace: '<p', '<p class="text-[52px]"' }}
+            {{ block.settings.text | replace: '<p', '<p class="text-center"' }}
           </div>
 
         {% when 'overlay' %}
@@ -55,20 +68,18 @@
             %}
           </div>
 
-          {% comment %}
-            {% when 'video_url' %}
-            <div class='stack-item'>
-              {% render 'video_external',
-                _video_url: block.settings.video_url,
-                _autoplay: block.settings.autoplay,
-                _loop: block.settings.loop,
-                _muted: block.settings.muted,
-                _height: block.settings.height,
-                _max_width: block.settings.width,
-                _aspect_ratio: block.settings.aspect_ratio
-              %}
-            </div>
-          {% endcomment %}
+        {% when 'video_url' %}
+          <div class='stack-item'>
+            {% render 'video-external',
+              _video_url: block.settings.video_url,
+              _autoplay: block.settings.autoplay,
+              _loop: block.settings.loop,
+              _muted: block.settings.muted,
+              _height: block.settings.height,
+              _max_width: block.settings.width,
+              _aspect_ratio: block.settings.aspect_ratio
+            %}
+          </div>
       {% endcase %}
     {% endfor %}
   </div>
@@ -110,21 +121,18 @@
       "type": "image",
       "name": "Image",
       "settings": [
+        { "type": "header", "content": "Image" },
         {
           "type": "image_picker",
-          "id": "image",
-          "label": "Image",
+          "id": "desktop_image",
+          "label": "Desktop",
           "info": "3840 x 2160 is recommended"
         },
         {
-          "type": "range",
-          "id": "image_height",
-          "label": "Height",
-          "default": 700,
-          "min": 200,
-          "max": 1000,
-          "step": 10,
-          "unit": "px"
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile",
+          "info": "800 x 1200 is recommended"
         }
       ]
     },
@@ -152,6 +160,9 @@
           "id": "text_color",
           "label": "Text color"
         },
+        { "type": "header", "content": "Font size" },
+        { "type": "number", "label": "Desktop", "id": "text_size_desktop", "default": 52 },
+        { "type": "number", "label": "Mobile", "id": "text_size_mobile", "default": 32 },
         {
           "type": "select",
           "id": "position",
