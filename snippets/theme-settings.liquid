@@ -1,0 +1,14 @@
+<!-- Disable Button Hovers -->
+{% if settings.disable_button_hover_animations %}
+  <style>
+    .btn.btn-primary:hover {
+      background-color: rgb(var(--color-button));
+      color: rgb(var(--color-button-text));
+    }
+
+    .btn.btn-secondary:hover {
+      background-color: rgb(var(--color-secondary-button));
+      color: rgb(var(--color-secondary-button-text));
+    }
+  </style>
+{% endif %}

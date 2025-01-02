@@ -15,15 +15,13 @@
         media='(max-width: 767px)'>
     {% endif %}
 
-    <!-- Desktop Image -->
     <source
       srcset='{% for width in breakpoints %}{{ desktop_image | image_url: width: width }} {{ width }}w{% unless forloop.last %}, {% endunless %}{% endfor %}'
       media='(min-width: 768px)'>
 
-    <!-- Fallback Image -->
     <img
       {% if _class %}
-        class='{{ _class }}'
+        class='object-cover {{ _class }}'
       {% endif %}
       src='{{ desktop_image | image_url }}'
       width='100%'

@@ -237,6 +237,11 @@
     "name": "t:settings_schema.buttons.name",
     "settings": [
       {
+        "id": "disable_button_hover_animations",
+        "type": "checkbox",
+        "label": "Disable hover animations"
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.global.settings.header__border.content"
       },

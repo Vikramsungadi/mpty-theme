@@ -2,7 +2,7 @@
 
 /* Container */
 splider-component.splide {
-  position: static;
+  /* position: static; */
   display: grid;
   grid-template-areas: 'stack';
 }
@@ -11,6 +11,7 @@ splider-component.splide {
 splider-component .splide__arrows {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-inline: 1rem;
   grid-area: stack;
 }
@@ -19,18 +20,30 @@ splider-component .splide__arrows {
 splider-component .splide__arrow {
   position: static;
   transform: none;
-  background: transparent;
-  height: auto;
+  background: rgba(0, 0, 0, 0.4);
+  height: fit-content;
   width: auto;
   border: none;
-  border-radius: 0;
+  border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.8;
+  opacity: 1;
   padding: 0;
   cursor: pointer;
   z-index: 1;
+  transition:
+    opacity,
+    transform 0.2s ease-in;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+}
+splider-component.splide.is-focus-in .splide__arrow:focus {
+  outline: 3px solid #00000080;
+  outline-offset: 3px;
+}
+splider-component .splide__arrow:active {
+  opacity: 0.7;
+  transform: scale(0.96);
 }
 
 /* Previous arrow */
@@ -55,4 +68,28 @@ splider-component .splide__arrow svg {
 splider-component .splide__track {
   grid-area: stack;
   position: static;
+}
+
+/* Pagination */
+splider-component .splide__pagination {
+  grid-area: stack;
+  position: static;
+  height: fit-content;
+  width: fit-content;
+  justify-self: center;
+  align-self: flex-end;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 999px;
+  margin-bottom: 10px;
+  padding: 0 0.6rem;
+}
+
+splider-component .splide__pagination li {
+  display: flex;
+}
+
+splider-component .splide__pagination li button {
+  margin-block: 4px;
+  width: 6px;
+  height: 6px;
 }

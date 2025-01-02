@@ -1,5 +1,3 @@
-{% comment %} <script src='{{ 'media-banner.js' | asset_url }}' defer></script> {% endcomment %}
-
 {% liquid
   assign id = section.id
   assign padding_bottom = section.settings.padding_bottom
@@ -23,6 +21,7 @@
 
 <div class='{{wrapper}}'>
   <div class='media-banner-wrapper stack-container'>
+    {% if section.settings.url %}<a href='{{ section.settings.url }}'>{% endif %}
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'image' %}
@@ -30,7 +29,8 @@
             {% render 'image',
               _class: 'md:aspect-[16/9] object-cover aspect-[800/1200]',
               _desktop_image: block.settings.desktop_image,
-              _mobile_image: block.settings.mobile_image
+              _mobile_image: block.settings.mobile_image,
+              _height: block.settings.image_height
             %}
           </div>
 
@@ -47,8 +47,11 @@
             }
           </style>
           <div
-            class='stack-item text-wrapper flex {{ block.settings.position }}'>
-            {{ block.settings.text | replace: '<p', '<p class="text-center"' }}
+            class='stack-item text-wrapper flex flex-col text-center [font-size:inherit] {{ block.settings.position }}'>
+            <div class='[&>*]:[font-size:inherit]'>
+              {{ block.settings.text }}
+            </div>
+            <button class='btn btn-secondary mt-4'>Button</button>
           </div>
 
         {% when 'overlay' %}
@@ -82,6 +85,7 @@
           </div>
       {% endcase %}
     {% endfor %}
+    {% if section.settings.url %}</a>{% endif %}
   </div>
 </div>
 
@@ -114,7 +118,8 @@
       "unit": "px",
       "label": "Bottom Padding",
       "default": 0
-    }
+    },
+    { "type": "url", "id": "url", "label": "Redirection" }
   ],
   "blocks": [
     {
@@ -133,6 +138,16 @@
           "id": "mobile_image",
           "label": "Mobile",
           "info": "800 x 1200 is recommended"
+        },
+        {
+          "type": "range",
+          "id": "image_height",
+          "label": "Height",
+          "default": 700,
+          "min": 200,
+          "max": 1000,
+          "step": 10,
+          "unit": "px"
         }
       ]
     },
