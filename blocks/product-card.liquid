@@ -1,0 +1,28 @@
+<div>
+  <h2>{{ product.title }}</h2>
+</div>
+
+{% schema %}
+{
+  "name": "Product Card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Enable/Disable"
+    },
+    {
+      "id": "title",
+      "label": "Title",
+      "type": "checkbox"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product (price)",
+      "settings": {
+        "product": "{{ closest.product }}"
+      }
+    }
+  ]
+}
+{% endschema %}
